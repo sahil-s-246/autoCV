@@ -163,9 +163,9 @@
  % Work done list 1.
  % Work done list 2.
  % Work done list 3.
-\item[$\bullet$]Dashboard Creation: Designed and developed comprehensive HR attrition dashboards using RubiSight to visualize key metrics and trends.
-\item[$\bullet$]Predictive Modeling: Built and deployed predictive models for HR attrition analysis using RubiStudio and Jupyter Notebook, enhancing decision-making processes.
-\item[$\bullet$] Model Evaluation and Accuracy: Conducted extensive model evaluation and comparison, including Decision Trees,XGBoost and Random Forest achieving an accuracy of 89\%.
+\item[$\bullet$]Performed customer segmentation based on rfm, type of products and geography and trained a K-means model obtaining a silhouette score of 0.65.
+\item[$\bullet$]Developed a model to predict Employee Attrition using Random Forest to attain an accuracy score of 0.89.
+\item[$\bullet$]Created workflows for the aforementioned models on Rubistudio. \href{https://www.rubiscape.com/data-science/}{\footnotesize\faExternalLink}
 \resumeItemListEnd
 
 
@@ -177,8 +177,21 @@
 \section{Projects}
 \resumeSubHeadingListStart
 \resumeProject
+{Restaurant Menu Dish recommendation system\raisebox{-0.3mm}
+{\href{https://colab.research.google.com/drive/1xrPQn7jqFEclPZFNKwUkv968rrxqiZ8k?usp=sharing}{\footnotesize\faExternalLink}}}
+{Weaviate, Gemini API, Pandas}
+{Aug 2024} %Event Dates
+
+\resumeItemListStart
+\vspace{1mm}
+\item[$\bullet$] Utilized Weaviate's vector database to retrieve dishes relevant to user's query from the menu
+\item[$\bullet$]Reranked the obtained dishes using Gemini API with respect to the user's prompt
+\resumeItemListEnd
+
+
+\resumeProject
 {IMagic \raisebox{-0.3mm}
-{\href{https://github.com/sahil-s-246/IMagic}{\footnotesize\faExternalLink}}} %Project Name
+{\href{https://github.com/sahil-s-246/Camspeak}{\footnotesize\faExternalLink}}} %Project Name
 {Streamlit, Scikitlearn, Stability AI API,} %Project Name, Location Name
 {Jul 2024} %Event Dates
 
@@ -187,25 +200,25 @@
 
 \item[$\bullet$] Developed an image processing application using Streamlit for interactive user interface
 \item[$\bullet$]Implemented K-means clustering algorithm-based image compression for efficient file size reduction.
-\item[$\bullet$]Integrated Gemini Stability and Stable Diffusion APIs for advanced image processing capabilities including text extraction and upscaling. 
+\item[$\bullet$]Integrated Gemini Stability and Stable Diffusion APIs for advanced image processing capabilities including text extraction and generation. 
 \resumeItemListEnd
 
-\resumeProject
-{Analysis of Programming Language Popularity on Stack Overflow \raisebox{-0.3mm}
-{\href{https://colab.research.google.com/drive/1xrPQn7jqFEclPZFNKwUkv968rrxqiZ8k?usp=sharing}{\footnotesize\faExternalLink}}}
-{Matplotlib, Pandas, Plotly, Google Colab}
- %Project Name, Location Name
-{Dec 2023} %Event Dates
+% \resumeProject
+% {Analysis of Popular Languages on Stack Overflow\raisebox{-0.3mm}
+% {\href{https://colab.research.google.com/drive/1xrPQn7jqFEclPZFNKwUkv968rrxqiZ8k?usp=sharing}{\footnotesize\faExternalLink}}}
+% {Pandas, Plotly, Google Colab}
+%  %Project Name, Location Name
+% {Dec 2023} %Event Dates
 
-\resumeItemListStart
-\vspace{1mm}
-\item[$\bullet$] Utilized Stack Overflow's query system to assess programming language popularity among users by analyzing tag frequencies associated with their posts
-\item[$\bullet$]Developed an interactive Plotly graph to visualize and explore the relative popularity and trends of programming languages based on their occurrences in user-contributed posts
-\resumeItemListEnd
+% \resumeItemListStart
+% \vspace{1mm}
+% \item[$\bullet$] Utilized Stack Overflow's query system to assess programming language popularity among users by analyzing tag frequencies associated with their posts
+% \item[$\bullet$]Developed an interactive Plotly graph to visualize and explore the relative popularity and trends of programming languages based on their occurrences in user-contributed posts
+% \resumeItemListEnd
 
 \resumeProject
 {FlightFinder \raisebox{-0.3mm}
-{\href{https://github.com/sahil-s-246/Flight-Finder}{\footnotesize\faExternalLink}}} %Project Name
+{\href{https://github.com/sahil-s-246/FlightFinder}{\footnotesize\faExternalLink}}} %Project Name
 {Smtplib, Twilio API} %Project Name, Location Name
 {Jun 2023} %Event Dates
 
@@ -224,7 +237,7 @@ Utilized the Tequila API to retrieve detailed flight information, facilitating r
 
 % \resumeItemListStart
 % \vspace{1mm}
-% \item[$\bullet$] Employed OpenCV library to interface with the camera, capturing input images for text extraction.
+% \item[$\bullet$] Employed OpenCV library to interface with the camera, capturing input images for text extraction and translation
 % \item[$\bullet$] Integrated an Optical Character Recognition (OCRSpace) API to extract text from images and used gTTS (Google Text-to-Speech) for translating the recognized text into speech output
 % \resumeItemListEnd
 
@@ -314,9 +327,10 @@ and contributed Python and Apps Script snippets
 \vspace{0.2mm}
 \small{\begin{tabular*}{\textwidth}[t]{p{0.22\textwidth} p{0.68\textwidth}@{\extracolsep{\fill}}r}
 
-\resumeAchieve{DeepLearning.AI}{Advanced Learning Algorithms}{2024}
+\resumeAchieve{DeepLearning.AI}{Machine Learning Specialization}{2024}
+\resumeAchieve{Rubiscape}{Advanced Data Visualisation}{2024}
 \resumeAchieve{Udemy}{100 Days of Code: The Complete Python Pro Bootcamp for 2023}{2023}
-\resumeAchieve{Coursera}{Introduction to Generative AI}{2023}
+
 % \resumeAchieve{Cisco Networking Academy}{Networking Basics}{2023}
 
 
@@ -341,7 +355,7 @@ and contributed Python and Apps Script snippets
 
 % \resumeAchieve{Hacktoberfest 9}{Contributed to various repositories and completed Hacktoberfest}{2022}
 
-\resumeAchieve{30 Days of Cloud Challenge}{Completed the challenge on cloud skills boost}{2022}
+\resumeAchieve{30 Days of Google Cloud}{Completed the challenge on Google's cloud skills boost}{2022}
 
 \end{tabular*}}
 
