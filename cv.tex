@@ -1,217 +1,395 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2021 Jitin Nair
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%	
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%	
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
 
-%----------------------------------------------------------------------------------------
-%	DOCUMENT DEFINITION
-%----------------------------------------------------------------------------------------
 
-% article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,12pt]{article}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
-\usepackage{url}
-\usepackage{parskip} 	
-
-%other packages for formatting
-\RequirePackage{color}
-\RequirePackage{graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[scale=0.9]{geometry}
-
-%tabularx environment
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
 \usepackage{tabularx}
-
-%for lists within experience section
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
 \usepackage{enumitem}
-
-% centered version of 'X' col. type
-\newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
-\usepackage{supertabular}
-\usepackage{tabularx}
-\newlength{\fullcollw}
-\setlength{\fullcollw}{0.47\textwidth}
-
-%custom \section
-\usepackage{titlesec}				
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
 \usepackage{multicol}
-\usepackage{multirow}
-
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
-\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{10pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
-\definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
-\usepackage{fontawesome5}
-
-%debug page outer frames
-%\usepackage{showframe}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome}
+\usepackage[most]{tcolorbox}
 
 
-% job listing environments
-\newenvironment{jobshort}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    }
-    {
-    }
-
-\newenvironment{joblong}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
-    }
-    {
-    \end{itemize}
-    \end{minipage}    
-    }
+% Set the margins
+\geometry{left=0.85cm, top=0.8cm, right=0.85cm, bottom=0.2cm}
 
 
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
 
-%----------------------------------------------------------------------------------------
-%	BEGIN DOCUMENT
-%----------------------------------------------------------------------------------------
+
+%-------------------------
+% Custom commands
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \hspace{-3mm}{#1}:\hspace{1mm} & \hspace*{0pt}\hfill{\footnotesize{ #3}} \vspace{-0.5mm}\\ \hspace{-2.9mm}#2 
+    \end{tabular*}
+    \vspace{0mm}
+}
+
+\newcommand{\resumeExp}[4]{
+\vspace{0mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.4mm} \small\textbf{#1} & {\footnotesize{#3}}\vspace{-1.2mm}\\
+        \hspace{-4.3mm} \footnotesize{\text{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-6.1mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.4mm} \small\textbf{#1} & {\footnotesize{#3}}\vspace{-1mm}\\
+        \hspace{-4.3mm} \footnotesize{\text{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-6.5mm}
+}
+
+\newcommand{\resumeEdu}[4]{
+\vspace{0mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.3mm} \small\textbf{#1} & \footnotesize{#3}\vspace{-1mm} \\
+        \hspace{-4.3mm} \footnotesize{#2} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-3.2mm}
+}
+
+\newcommand{\resumeAchieve}[3]
+{
+\hspace{-3.1mm}\textbf{ #1} & {#2} & \hspace{3mm}\footnotesize{#3}
+\vspace{0mm}\\
+}
+
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm,itemsep=-2.5mm]}
+
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-1.5mm}}
+
+\renewcommand{\arraystretch}{1}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+
+
+%-------------------------------------------
+
+
+\newcommand{\name}{SAHIL PARUPUDI} % Your Name
+\newcommand{\course}{B.E -Computer Engineering} % Your Course
+\newcommand{\roll}{xxxx} % Your Roll No.
+\newcommand{\phone}{8550999920} % Your Phone Number
+\newcommand{\emaila}{sahilsrinivas3@gmail.com} %Email 1
+\newcommand{\github}{sahil-s-246} %Github
+\newcommand{\website}{https://example.com} %Website
+\newcommand{\linkedin}{sahilparupudi} %linkedin
+
+
+
 \begin{document}
-
-% non-numbered pages
-\pagestyle{empty} 
-
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
-
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
-
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Your Name} \\[7.5pt]
-\href{https://github.com/username}{\raisebox{-0.05\height}\faGithub\ username} \ $|$ \ 
-\href{https://linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
-\href{mailto:email@mysite.com}{\raisebox{-0.05\height}\faEnvelope \ email@mysite.com} \ $|$ \ 
-\href{tel:+000000000000}{\raisebox{-0.05\height}\faMobile \ +00.00.000.000} \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
-
-%Interests/ Keywords/ Summary
-\section{Summary}
-This CV is automatically generated and deployed using the \href{https://github.com/jitinnair1/autoCV}{autoCV} template along with GitHub Actions such that a new version of the CV is compiled, published and ready for use when the cv.tex file is updated. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
-
-%Experience
-\section{Work Experience}
-
-\begin{jobshort}{Designation}{Jan 2021 - present}
-long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width
-\end{jobshort}
+\fontfamily{cmr}\selectfont
 
 
-\begin{joblong}{Designation}{Mar 2019 - Jan 2021}
-\item long long line of blah blah that will wrap when the table fills the column width
-\item again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-\end{joblong}
-  
-%Projects
-\section{Projects}
+%----------HEADING-----------------
+\begin{center}
+    \LARGE{\href{https://sahil-s-246.streamlit.app}{ \textbf{\name}}}
+\end{center}
+\vspace{-5.5mm}
+\begin{center}
+    \small{\href{https://github.com/\github}{\faGithub \hspace{0.2mm} github.com/sahil-s-246} |  \href{https://www.linkedin.com/in/\linkedin/}{\faLinkedinSquare \hspace{0.2mm} linkedin.com/in/sahilparupudi} | \href{mailto:\emaila}{\faSend \hspace{0.2mm} \emaila} | \faPhone \hspace{0.2mm} +91-\phone }
+    
+\end{center}
+\vspace{-3mm}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
+%-----------EDUCATION-----------------
 
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
+\vspace{-2.5mm}
 \section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
 
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
+\resumeSubHeadingListStart
+\resumeEdu{Dr. D.Y. Patil Institute of Technology, Pimpri, Pune} 
+{B.E. Computer Engineering} 
+{Sep 2021 - Jun 2025}
 
-2022 & Class 12th Some Board \hfill  (Grades) \\
+\vspace{2.5mm}
+\resumeEdu{Modern College of Arts, Science and Commerce, Shivajinagar, Pune }
+{HSC : 96.33\% }
+{Aug 2019 - Jun 2021}
 
-2021 & Class 10th Some Board \hfill  (Grades) \\
-\end{tabularx}
+\vspace{2.5mm}
+\resumeEdu{Bharatiya Vidya Bhavan  SNVM, Pune}
+{SSC : 87.60\%}
+{Jun 2008 - Jun 2019}
 
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
-\section{Publications}
-\begin{refsection}[citations.bib]
-\nocite{*}
-\printbibliography[heading=none]
-\end{refsection}
+\resumeSubHeadingListEnd
+\vspace{-3.5mm}
 
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
-\end{tabularx}
+%-----------EXPERIENCE-----------------
+\section{Experience}
+\resumeSubHeadingListStart
+\resumeExp
+{XDE Studios}
+{AI/ML Intern}
+{Oct 2024 - Present}
+{Pune, India}
+\vspace{0.5mm}
+\resumeItemListStart
+ % Work done list 1.
+ % Work done list 2.
+ % Work done list 3.
+\item[$\bullet$] Fine-tuned a YOLOv8 model to detect shipping container (95\% recall) and seal numbers (75\% recall); integrated PaddleOCR for accurate OCR on curved and noisy surfaces.
+\item[$\bullet$] Built a scalp image analysis tool combining EfficientNet for hair density classification (92\% accuracy) and YOLOv8 for dandruff detection; enabled personalized hair care recommendations.
+\item[$\bullet$] Developed a face recognition pipeline for event photo tagging using InsightFace for embedding extraction and HDBSCAN for unsupervised clustering (0.70 silhouette score) of individuals.
 
-\vfill
-\center{\footnotesize Last updated: \today}
+\resumeItemListEnd
+\resumeExp
+{Rubiscape}
+{Project Intern - Data Science}
+{Jun 2024 - Sep 2024}
+{Pune, India}
+\vspace{0.5mm}
+\resumeItemListStart
+ % Work done list 1.
+ % Work done list 2.
+ % Work done list 3.
+\item[$\bullet$]Performed customer segmentation based on rfm, type of products and geography and trained a K-means model obtaining a silhouette score of 0.65.
+\item[$\bullet$]Developed a model to predict Employee Attrition using Random Forest to attain an accuracy score of 0.89.
+\item[$\bullet$]Created workflows for the aforementioned models on Rubistudio. \href{https://www.rubiscape.com/data-science/}{\footnotesize\faExternalLink}
+\resumeItemListEnd
 
+
+\resumeSubHeadingListEnd
+\vspace{-4.5mm}
+
+
+%-----------PROJECTS-----------------
+\section{Projects}
+\resumeSubHeadingListStart
+\resumeProject
+{Restaurant Menu Dish recommendation system \raisebox{-0.3mm} 
+ {\href{https://github.com/sahil-s-246/Dish-Recommender}{\footnotesize\faExternalLink}}}
+{Weaviate, Gemini API, Pandas}
+{Aug 2024} %Event Dates
+
+\resumeItemListStart
+\vspace{1mm}
+\item[$\bullet$] Utilized Weaviate's vector database to retrieve dishes relevant to user's query from the menu
+\item[$\bullet$]Reranked the obtained dishes using Gemini API with respect to the user's prompt
+\resumeItemListEnd
+
+
+\resumeProject
+{IMagic \raisebox{-0.3mm}
+{\href{https://github.com/sahil-s-246/IMagic}{\footnotesize\faExternalLink}}} %Project Name
+{Streamlit, Scikitlearn, Stability AI API,} %Project Name, Location Name
+{Jul 2024} %Event Dates
+
+\resumeItemListStart
+\vspace{1mm}
+
+\item[$\bullet$] Developed an image processing application using Streamlit for interactive user interface
+\item[$\bullet$]Implemented K-means clustering algorithm-based image compression for efficient file size reduction.
+\item[$\bullet$]Integrated Gemini Stability and Stable Diffusion APIs for advanced image processing capabilities including text extraction and generation. 
+\resumeItemListEnd
+
+% \resumeProject
+% {Analysis of Popular Languages on Stack Overflow\raisebox{-0.3mm}
+% {\href{https://colab.research.google.com/drive/1xrPQn7jqFEclPZFNKwUkv968rrxqiZ8k?usp=sharing}{\footnotesize\faExternalLink}}}
+% {Pandas, Plotly, Google Colab}
+%  %Project Name, Location Name
+% {Dec 2023} %Event Dates
+
+% \resumeItemListStart
+% \vspace{1mm}
+% \item[$\bullet$] Utilized Stack Overflow's query system to assess programming language popularity among users by analyzing tag frequencies associated with their posts
+% \item[$\bullet$]Developed an interactive Plotly graph to visualize and explore the relative popularity and trends of programming languages based on their occurrences in user-contributed posts
+% \resumeItemListEnd
+
+\resumeProject
+{FlightFinder \raisebox{-0.3mm}
+{\href{https://github.com/sahil-s-246/Flight-Finder}{\footnotesize\faExternalLink}}} %Project Name
+{Smtplib, Twilio API} %Project Name, Location Name
+{Jun 2023} %Event Dates
+
+\resumeItemListStart
+\vspace{1mm}
+\item[$\bullet$] 
+Utilized the Tequila API to retrieve detailed flight information, facilitating real-time updates
+\item[$\bullet$] Implemented Sheety API to cross-reference flight prices from Google Sheets, automating comparisons against predefined thresholds Implemented SMTP via smtplib for email notifications and Twilio for instant messaging alerts when prices fell below the set threshold
+\resumeItemListEnd
+
+% \resumeProject
+% {Camspeak \raisebox{-0.3mm}
+% {\href{https://github.com/sahil-s-246/Camspeak}{\footnotesize\faExternalLink}}} %Project Name
+% {OpenCV, gTTS} %Project Name, Location Name
+% {Apr 2023} %Event Dates
+
+% \resumeItemListStart
+% \vspace{1mm}
+% \item[$\bullet$] Employed OpenCV library to interface with the camera, capturing input images for text extraction and translation
+% \item[$\bullet$] Integrated an Optical Character Recognition (OCRSpace) API to extract text from images and used gTTS (Google Text-to-Speech) for translating the recognized text into speech output
+% \resumeItemListEnd
+
+% \resumeProject
+% {\textbf{Snippets \raisebox{-0.3mm}
+%  {\href{https://github.com/acesdit/snippets}{\footnotesize\faExternalLink}}}}{Astro Project with Association of Computer Engineering Students, DIT}{Oct 2023}{}
+% \vspace{0mm}
+
+ 
+% \resumeItemListStart
+% \vspace{1mm}
+% \item[$\bullet$] Collaborated with club members to display a collection of code snippets encompassing Data Structures and Algorithms implementations, Bash scripting, Apps Script etc.
+
+% \item[$\bullet$] Initiated fundamental GitHub Actions
+% %Readme.md and Contributing.md, 
+% and contributed Python and Apps Script snippets
+
+
+% \resumeItemListEnd
+
+% \resumeProject
+% {MarksBook \raisebox{-0.3mm}
+%  {\href{https://github.com/acesdit/snippets}{\footnotesize\faExternalLink}}}
+% {College Exhibition Team Project with Javascript,Jupyter Notebook}
+%  %Project Name, Location Name
+% {Oct 2023} %Event Dates
+
+% \resumeItemListStart
+% \item[$\bullet$] Given a digital ledger(pdf) with each students' score, used regex to identify patterns in text.
+% \item[$\bullet$] Convert the  text to json and subsequently write it to an excel file.
+% \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-5.5mm}
+% \section{Experience}
+% \resumeSubHeadingListStart
+
+% \resumeExp
+% {Company 1 - Team}
+% {Title, Internship}
+% {May 2022 - Aug 2022}
+% {City, India}
+% \resumeItemListStart
+% \item[$\bullet$] Work done list 1.
+% \item[$\bullet$] Work done list 2.
+% \item[$\bullet$] Work done list 3.
+% \resumeItemListEnd
+
+
+% \resumeExp
+% {Company 2 - Team}
+% {Title, Internship}
+% {May 2022 - Aug 2022}
+% {City, India}
+% \resumeItemListStart
+% \item[$\bullet$] Work done list 1.
+% \item[$\bullet$] Work done list 2.
+% \item[$\bullet$] Work done list 3,
+% \item[$\bullet$] Work done list 4.
+% \resumeItemListEnd
+
+% \resumeSubHeadingListEnd
+% \vspace{-5.5mm}
+
+
+\section{Technical Skills}
+\vspace{0.2mm}
+
+\small{\begin{tabular*}{\textwidth}[t]{p{0.5\textwidth} p{0.5\textwidth}}
+
+\hspace{-3.1mm}{\textbf{ Programming languages:} Python, Java, C++} & {\textbf{Web Technologies:} HTML, CSS, Flask, JavaScript, FastAPI} \\  
+\hspace{-3.1mm}{\textbf{ Libraries:} Pandas, Streamlit, Scikit-Learn, Selenium, Ultralytics} & {\textbf{Miscellaneous:} MySQL, MongoDB, Git, Google Apps Script}
+\end{tabular*}}
+
+\vspace{-2.5mm}
+% \section{Relevant Coursework}
+% \vspace{0.2mm}
+
+
+% \small{\begin{tabular*}{\textwidth}[t]{p{\textwidth}}
+% \hspace{-3.1mm}\textbf{ Computer Science: }{Data Science, Artificial Intelligence, Cloud Computing Databases, Operating Systems, Computer Networks}\\
+% \hspace{-3.1mm}\textbf{ Mathematics: }{Theory of Computation, Discrete Maths}
+% \end{tabular*}}
+
+\vspace{-0.5mm}
+\section{Certifications}
+\vspace{0.2mm}
+\small{\begin{tabular*}{\textwidth}[t]{p{0.22\textwidth} p{0.68\textwidth}@{\extracolsep{\fill}}r}
+
+\resumeAchieve{DeepLearning.AI}{Machine Learning Specialization}{2024}
+\resumeAchieve{Rubiscape}{Advanced Data Visualisation}{2024}
+\resumeAchieve{Udemy}{100 Days of Code: The Complete Python Pro Bootcamp for 2023}{2023}
+
+% \resumeAchieve{Cisco Networking Academy}{Networking Basics}{2023}
+
+
+ 
+\resumeAchieve{Forage}{JP Morgan Chase \& Co.'s Software Engineering Lite
+}{2022}
+
+
+\end{tabular*}}
+
+\vspace{-2.5mm}
+\section{Achievements}
+\vspace{0.2mm}
+\small{\begin{tabular*}{\textwidth}[t]{p{0.22\textwidth} p{0.68\textwidth}@{\extracolsep{\fill}}r}
+
+
+\resumeAchieve{Hacktoberfest 10}{Completed Hacktoberfest by submitting 4 accepted Pull Requests}{2023}
+
+\resumeAchieve{CodeCraft}{Achieved 4th Place in a 4-Round Coding Competition organized by Computer Society of India, DIT}{2023}
+
+\resumeAchieve{Badminton}{3rd Place in Savitribai Phule Pune University's Inter-College Badminton tournament }{2023}
+
+% \resumeAchieve{Hacktoberfest 9}{Contributed to various repositories and completed Hacktoberfest}{2022}
+
+\resumeAchieve{30 Days of Google Cloud}{Completed the challenge on Google's cloud skills boost}{2022}
+
+\end{tabular*}}
+
+\vspace{-2.5mm}
+\section{Positions of Responsibility}
+\vspace{-0.4mm}
+
+\resumeSubHeadingListStart
+\resumePOR{\textbf{Sr. Data Manager, Association of Computer Engineering Students, DIT}} % Position
+{Co-led a team of four to manage the registration \& attendance of 1500+ participants using Apps Script.
+\\
+Raise }{\raisebox{0.75pt}{2023 - 2024}}
+\vspace{0.5mm}
+\resumePOR{\textbf{Jr. Technical Head, Association of Computer Engineering Students, DIT}}
+{Created and emailed certificates for 900+ participants of the club's flagship event using Canva and Apps Script.}
+{\raisebox{0.75pt}{2022 - 2023}}
+\vspace{-1mm}
+\resumeSubHeadingListEnd
+\hspace*{-2mm}\rule{1.030\textwidth}{0.1mm}
+\vspace{0mm}
+
+%-------------------------------------------
 \end{document}
