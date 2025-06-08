@@ -162,7 +162,7 @@
  % Work done list 1.
  % Work done list 2.
  % Work done list 3.
-\item[$\bullet$] Fine-tuned a YOLOv8 model to detect shipping container (95\% recall) and seal numbers (75\% recall); integrated PaddleOCR for accurate OCR on curved and noisy surfaces.
+\item[$\bullet$] Fine-tuned a YOLOv11 model to detect shipping container (95\% recall) and seal numbers (75\% recall); integrated PaddleOCR for accurate OCR on curved and noisy surfaces.
 \item[$\bullet$] Built a scalp image analysis tool combining EfficientNet for hair density classification (92\% accuracy) and YOLOv8 for dandruff detection; enabled personalized hair care recommendations.
 \item[$\bullet$] Developed a face recognition pipeline for event photo tagging using InsightFace for embedding extraction and HDBSCAN for unsupervised clustering (0.70 silhouette score) of individuals.
 
@@ -193,13 +193,14 @@
 \resumeProject
 {Restaurant Menu Dish recommendation system \raisebox{-0.3mm} 
  {\href{https://github.com/sahil-s-246/Dish-Recommender}{\footnotesize\faExternalLink}}}
-{Weaviate, Gemini API, Pandas}
+{React,Weaviate, FastAPI}
 {Aug 2024} %Event Dates
 
 \resumeItemListStart
 \vspace{1mm}
-\item[$\bullet$] Utilized Weaviate's vector database to retrieve dishes relevant to user's query from the menu
-\item[$\bullet$]Reranked the obtained dishes using Gemini API with respect to the user's prompt
+    \item[$\bullet$] Designed a hybrid recommendation engine using PyNNDescent-based collaborative filtering and content-based retrieval via Weaviate’s vector search.
+  \item[$\bullet$]Integrated Gemini API to re-rank dish recommendations based on user preferences, filters (e.g., allergy inputs), and context-aware prompts.
+
 \resumeItemListEnd
 
 
@@ -349,8 +350,6 @@ Utilized the Tequila API to retrieve detailed flight information, facilitating r
 
 
  
-\resumeAchieve{Forage}{JP Morgan Chase \& Co.'s Software Engineering Lite
-}{2022}
 
 
 \end{tabular*}}
